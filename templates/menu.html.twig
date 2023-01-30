@@ -1,0 +1,18 @@
+<header>
+    <div class="top-image"></div>
+    <ul class="menu">
+        <li id="accueil"><a href="{{path('homepage')}}">Accueil</a></li>
+        <li id="creation"><a href="{{path('article')}}">Créations</a></li>
+        {% if app.user %}
+        <li id="ajout"><a href="{{path('article')}}">Ajout</a>
+            <menu class="menu_ajout">
+                <li><a>Article</a></li>
+                <li><a>Catégorie</a></li>
+            <menu>
+        </li>
+        <li id="connexion"><a href="{{path('app_logout')}}"><img src="{{asset('icones/se-deconnecter.png')}}"/></a></li>
+        {% else %}
+        <li id="connexion"><a href="{{path('app_login')}}"><img src="{{asset('icones/connexion.png')}}"/></a></li>
+        {% endif %}
+    </ul>
+</header>

@@ -1,0 +1,183 @@
+/* RESET du CSS */ 
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    text-decoration: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul, menu {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* FIN RESET CSS */
+.top-image{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30%;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../images/top_img.jpg") ;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+}
+
+/* GESTION MENU */
+.menu{
+    width: 100%;
+    height: 2em;
+    background: grey;
+    display: flex;
+    top: 30%;
+    position: fixed;
+}
+.menu   li{
+    width: 20%;
+    flex-wrap: wrap;
+    line-height: 25px;
+    border: 1px black solid;
+    text-align: center;
+}
+.menu li:hover{
+    background-color: azure;
+}
+.menu>li:last-child{
+    max-width: 1.5%;
+    right: 0;
+    position: absolute;
+    border: none;
+    line-height: 0;
+    padding-top: 0.1%;
+    padding-right: 1%;
+}
+.menu>li img{
+    max-width: 100%;
+    height: auto;
+}
+.menu>li>a{
+    padding: 1% 43.7% 2.4%;
+}
+.menu_ajout{
+    display: none;
+    transition: all .3s;
+    background-color: grey;
+}
+#ajout:hover .menu_ajout{
+    display: flex;
+    transition: all .3s;
+}
+.menu_ajout>li>a{
+    padding: 1% 43.7% 2.4%;
+}
+.menu_ajout li{
+    width: 100%;
+    flex-wrap: wrap;
+    line-height: 25px;
+    border: 1px black solid;
+    text-align: center;
+}
+.menu_ajout li:hover{
+    background-color: azure;
+}
+
+/* FIN MENU */
+
+/* PAGE CONNEXION */ 
+
+.page_connexion{
+    padding-top: 5%;
+    display: flex;
+}
+.page_connexion>form{
+    width: 36%;
+}
+.page_connexion h1{
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+}
+.formulaire_connexion{
+    background-color: #495C70;
+    color: #FFF;
+    padding: 5%;
+    border: #53687E solid 10px;
+    box-shadow: 10px 5px 5px #83A4C5;
+}
+.formulaire_connexion>div{
+    padding: 2%;
+}
+.formulaire_connexion input{
+	background: transparent;
+	border: none;
+	border-bottom: 1px dashed #83A4C5;
+	width: 275px;
+	outline: none;
+	padding: 0px 0px 0px 0px;
+	font-style: italic;
+}
+#inputUsername{
+    margin-left: 10%;
+}
+#inputPassword{
+    margin-left: 7%;
+}
+.formulaire_connexion label{
+    font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 16px;
+	color: #fff;
+}
+.formulaire_connexion button{
+    background: #576E86;
+	border: none;
+	padding: 8px 10px 8px 10px;
+	border-radius: 5px;
+	color: #A8BACE;
+    margin-left: 25%;
+    margin-top: 2%;    
+    transition: all .3s;
+}
+.formulaire_connexion button:hover{
+    background: #394D61;
+    transition: all .3s;
+}
+/* FIN CONNEXION */
