@@ -71,6 +71,9 @@ body{
     top: 30%;
     position: fixed;
 }
+.menu a{
+    color: #000;
+}
 .menu   li{
     width: 20%;
     flex-wrap: wrap;
@@ -97,6 +100,9 @@ body{
 .menu>li>a{
     padding: 1% 43.7% 2.4%;
 }
+.menu>li:nth-child(3)>a{
+    padding: 1% 32.3% 3.4%;
+}
 .menu_ajout{
     display: none;
     transition: all .3s;
@@ -107,7 +113,7 @@ body{
     transition: all .3s;
 }
 .menu_ajout>li>a{
-    padding: 1% 43.7% 2.4%;
+    padding: 3% 27% 3.4%;
 }
 .menu_ajout li{
     width: 100%;
@@ -127,6 +133,7 @@ body{
 .page_connexion{
     padding-top: 5%;
     display: flex;
+    background-color: #fff;
 }
 .page_connexion>form{
     width: 36%;
@@ -181,3 +188,43 @@ body{
     transition: all .3s;
 }
 /* FIN CONNEXION */
+
+/* PAGE HOME */ 
+body{
+    display: block;
+    background: linear-gradient(-45deg, #ebecee, #dabe97, #f1c967, #c05c21);
+}
+.home{
+    position: fixed;
+    padding-top: 18%;
+    display: block;
+    width: 100%;
+    z-index: -1;
+}
+.home>h1{
+    text-shadow:   -1px -1px 0 #751C1C, 1px -1px 0 #751C1C, -1px 1px 0 #751C1C, 1px 1px 0 #751C1C, 1px 1px 10px #141414;color:#DE3535;
+    background-color: #808080;
+    margin-left: 31%;
+    margin-right: 35.9%;
+    font-size: 27px;
+}
+    
+
+/* FIN HOME */
+
+/* MEQDIA QUERIES */
+@media (max-width: 1500px) {
+    .page_connexion>form{
+        margin-left: 11%;
+        margin-top: 5%;
+    }
+    .page_connexion>img{
+        width: 45%;
+    }
+    .page_connexion{
+        background-color: #fff;
+    }
+    .page_connexion{
+        height: 590px;
+    }
+}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Page de contact{% endblock %}
+{% block body %}
+    {% include "menu.html.twig" %}
+    <div class="home">
+        <h1>Contacter-nous </h1>
+        
+        <div>   
+            {{ form(formulaire) }}
+        </div>
+    </div>
+{% endblock %}
