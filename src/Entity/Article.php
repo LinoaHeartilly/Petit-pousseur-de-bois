@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -35,24 +36,27 @@ class Article
     private $prix;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $chemin_image;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $temps_realisation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="cat_art")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="cat_art")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $art_cat;
 
     public function __construct()
     {
-        $this->art_cat = new ArrayCollection();
+        
     }
+
+
 
     public function getId(): ?int
     {
@@ -107,45 +111,28 @@ class Article
         return $this;
     }
 
-    public function getTempsRealisation(): ?\DateTimeInterface
+    public function getTempsRealisation(): ?int
     {
         return $this->temps_realisation;
     }
 
-    public function setTempsRealisation(?\DateTimeInterface $temps_realisation): self
+    public function setTempsRealisation(?int $temps_realisation): self
     {
         $this->temps_realisation = $temps_realisation;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Categorie>
-     */
-    public function getArtCat(): Collection
+    public function getArtCat(): ?Categorie
     {
         return $this->art_cat;
     }
 
-    public function addArtCat(Categorie $artCat): self
+    public function setArtCat(?Categorie $art_cat): self
     {
-        if (!$this->art_cat->contains($artCat)) {
-            $this->art_cat[] = $artCat;
-            $artCat->setCatArt($this);
-        }
+        $this->art_cat = $art_cat;
 
         return $this;
     }
 
-    public function removeArtCat(Categorie $artCat): self
-    {
-        if ($this->art_cat->removeElement($artCat)) {
-            // set the owning side to null (unless already changed)
-            if ($artCat->getCatArt() === $this) {
-                $artCat->setCatArt(null);
-            }
-        }
-
-        return $this;
-    }
 }

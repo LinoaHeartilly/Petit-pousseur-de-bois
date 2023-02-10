@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,10 +25,16 @@ class Categorie
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="art_cat")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="art_cat")
      */
     private $cat_art;
+
+    public function __construct()
+    {
+        $this->cat_art = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -45,15 +53,34 @@ class Categorie
         return $this;
     }
 
-    public function getCatArt(): ?Article
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getCatArt(): Collection
     {
         return $this->cat_art;
     }
 
-    public function setCatArt(?Article $cat_art): self
+    public function addCatArt(Article $catArt): self
     {
-        $this->cat_art = $cat_art;
+        if (!$this->cat_art->contains($catArt)) {
+            $this->cat_art[] = $catArt;
+            $catArt->setArtCat($this);
+        }
 
         return $this;
     }
+
+    public function removeCatArt(Article $catArt): self
+    {
+        if ($this->cat_art->removeElement($catArt)) {
+            // set the owning side to null (unless already changed)
+            if ($catArt->getArtCat() === $this) {
+                $catArt->setArtCat(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
