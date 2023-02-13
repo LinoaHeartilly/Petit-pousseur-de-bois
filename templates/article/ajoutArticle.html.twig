@@ -10,4 +10,12 @@
         {{ form(formulaire) }}
 
     </div>
+
+    <script type="text/javascript">
+    var reply_click = function()
+    {
+        confirm("Pas de regret :D ?");
+    }
+    document.getElementById('article_envoyer').onclick = reply_click;
+</script>
 {% endblock %}

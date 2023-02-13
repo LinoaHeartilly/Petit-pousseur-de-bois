@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Form\CategorieType;
+use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ class CategorieController extends AbstractController
     /**
      * @Route("/categorie", name="categorie")
      */
-    public function index(Request $request, CategorieRepository $cr): Response
+    public function index(Request $request, CategorieRepository $cr, ArticleRepository $ar): Response
     {
         // instanciation de la class form categorie
         $form = $this->createForm(CategorieType::class);
@@ -32,6 +33,15 @@ class CategorieController extends AbstractController
             
             // insertion en BDD
             $cr->add($categorie, 1);
+
+            $articles = $ar->findAll();
+
+            $succes = "L'enregistrement de la catégorie a été effectuée avec succès";
+            return $this->renderForm('article/index.html.twig', [
+                'succes' => $succes,
+                'articles' => $articles,
+    
+            ]);
         }
 
         return $this->renderForm('categorie/index.html.twig', [

@@ -6,10 +6,19 @@
     {% include "menu.html.twig" %}
     <div class="home">
         <h1> Voici nos création </h1>
-
-        <div>
-            {{ articles}}
+        <div class="body_article">
+            {% for article in articles %}
+            <div>
+                <p>Nom : {{ article.nom }}</p>
+                <p>Description : {{ article.description }}</p>
+                <p>Prix : {{ article.prix }} €</p>
+                <p>Temps de réalisation estimé : {{ article.tempsRealisation }} {% if article.tempsRealisation == 1 or article.tempsRealisation == 0  %} jour. {% else %} jours. {% endif %} </p>
+                <p></p>
+            </div>
+            {% endfor %}
         </div>
-
     </div>
+
+
 {% endblock %}
+

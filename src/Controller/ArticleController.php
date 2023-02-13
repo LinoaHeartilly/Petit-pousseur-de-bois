@@ -21,7 +21,6 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $ar): Response
     {
         $articles = $ar->findAll();
-        dd($articles);
         
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
@@ -45,10 +44,16 @@ class ArticleController extends AbstractController
             $article->setPrix($form->get('prix')->getData());
             $article->setTempsRealisation($form->get('temps_realisation')->getData());
             $cat = $form->get('art_cat')->getData();
-            $id = $cat->getId();
             $article->setArtCat($cat);
             $ar->add($article, 1);
-            dd($article);
+
+            $articles = $ar->findAll();
+            $succes = "L'enregistrement de l'article a été effectuée avec succès";
+            return $this->renderForm('article/index.html.twig', [
+                'succes' => $succes,
+                'articles' => $articles,
+    
+            ]);
         }
 
         return $this->renderForm('article/ajoutArticle.html.twig', [

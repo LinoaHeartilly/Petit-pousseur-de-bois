@@ -5,6 +5,9 @@
 {% block body %}
     {% include "menu.html.twig" %}
     <div class="home">
-    <h1>Bienvenue amoureux du bois et du dessin  </h1>
+        <h1>Bienvenue amoureux du bois et du dessin  </h1>
+        {% if succes is defined  %}
+        <p>{{succes}}</p>
+        {% endif %}
     </div>
 {% endblock %}
