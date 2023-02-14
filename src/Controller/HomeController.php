@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Notifier\Event\FailedMessageEvent;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -46,26 +47,21 @@ class HomeController extends AbstractController
             // récupération champ content
             $contenu = $data['contenu'];
 
-            // création de l'email
             $email = (new Email())
-                ->from($adresse)
-                ->to('alexandre.caniac93@gmail.com')
-                ->subject('Site : nouveau contact')
-                ->text($contenu);
+            ->from($adresse)
+            ->to('alexandre.caniac93@gmail.com')
+            ->subject('Time for Symfony Mailer!')
+            ->text($contenu)
+            ->html('<p>See Twig integration for better HTML integration!</p>
+                <p>mail : '.$adresse.'</p>
+                <p>contenu : '.$contenu.'</p>');
+            
+            try{
+        $mailer->send($email);
 
-            // envoie de l'email
-            $mailer->send($email);
-            /* $mailerService->send(
-                "New message", 
-                $data['email'], 
-                "alexandre.caniac93@gmail.com", 
-                "home/index.html.twig",
-                [
-                    "name" => "toto", 
-                    "message" => $data['contenu']
-                ]
-            );*/
-            dd($data);
+            }catch(FailedMessageEvent $event){
+                $event->getError();
+            }
         }       
 
         return $this->renderForm('home/contact.html.twig', [
