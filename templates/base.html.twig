@@ -13,9 +13,13 @@
 
     </head>
     <body>
+    
         {% block body %}
-        
+
         {% endblock %}
-        
+        {% if app.request.requesturi != '/article' %}
+        </div>
+        {% endif %}
+        {% include "footer.html.twig" %}
     </body>
 </html>

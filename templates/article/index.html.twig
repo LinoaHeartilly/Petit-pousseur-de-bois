@@ -3,22 +3,33 @@
 
 {% block title %}Création{% endblock %}
 {% block body %}
+        
     {% include "menu.html.twig" %}
-    <div class="home">
-        <h1> Voici nos création </h1>
-        <div class="body_article">
-            {% for article in articles %}
-            <div>
-                <p>Nom : {{ article.nom }}</p>
-                <p>Description : {{ article.description }}</p>
-                <p>Prix : {{ article.prix }} €</p>
-                <p>Temps de réalisation estimé : {{ article.tempsRealisation }} {% if article.tempsRealisation == 1 or article.tempsRealisation == 0  %} jour. {% else %} jours. {% endif %} </p>
-                <p></p>
+    <div class="home_article" id="top-image">
+        <h1> Voici nos créations </h1>
+        {{ form_start(formulaire, {'attr': {'class': 'filtre_article'}}) }}
+        {{ form_row(formulaire.nom) }}
+        {{ form_row(formulaire.art_cat) }}
+        {{ form_row(formulaire.chercher, { 'label': ' ' }) }}   
+        <img src="{{asset('icones/loupe.png')}}"/>
+        {{ form_end(formulaire) }}
+        <div>
+            <div class="body_article">
+                {% for article in articles %}
+                <div>
+                    {% if article.cheminImage %}
+                    <img src="{{asset('images/'~article.cheminImage )}}"/>
+                    {% else %}
+                    <p></p>
+                    {% endif %}
+                    <p>{{ article.nom|capitalize }}</p>
+                    <p>{{ article.prix }} €</p>
+                    <a href="{{ path('viewArticle', {id:article.id}) }}"></a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-
 
 {% endblock %}
 

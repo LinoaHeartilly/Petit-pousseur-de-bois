@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Form\ContactType;
-use App\Services\MailerService;
+use App\Repository\ArticleRepository;
 use App\Services\MessageService;
+use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,14 +31,14 @@ class HomeController extends AbstractController
      * @Route("/contact", name="contact")
      * @param Request $request
      * @param MessageService $messageService
-     * @param MailerService $mailerService
      */
-    public function contact(Request $request, MailerInterface $mailer, MailerService $mailerService): Response
+    public function contact(Request $request, MailerInterface $mailer): Response
     {
         // instanciation form
         $form = $this->createForm(ContactType::class);
         // récupération des données
-        $form->handleRequest($request);
+        $form->handleRequest($request);        
+
 
         // controle form
         if($form->isSubmitted() && $form->isValid()){
@@ -50,9 +52,9 @@ class HomeController extends AbstractController
             $email = (new Email())
             ->from($adresse)
             ->to('alexandre.caniac93@gmail.com')
-            ->subject('Time for Symfony Mailer!')
+            ->subject('Petits pousseur')
             ->text($contenu)
-            ->html('<p>See Twig integration for better HTML integration!</p>
+            ->html('<p></p>
                 <p>mail : '.$adresse.'</p>
                 <p>contenu : '.$contenu.'</p>');
             
@@ -62,11 +64,28 @@ class HomeController extends AbstractController
             }catch(FailedMessageEvent $event){
                 $event->getError();
             }
+            
+            $succes = 'Mail envoyé avec succès.';
+
+            return $this->renderForm('home/contact.html.twig', [
+                'succes' => $succes,
+                'formulaire' => $form, 
+            ]);
         }       
 
         return $this->renderForm('home/contact.html.twig', [
-            'controller_name' => 'HomeController',
-            'formulaire' => $form
+            'formulaire' => $form, 
         ]);
+    }
+
+    /**
+     * 
+     * @Route("/mention_legale", name="cgv")
+     * @return Response
+     */
+    public function cgv(): Response
+    {
+
+        return $this->render('home/cgv.html.twig');
     }
 }

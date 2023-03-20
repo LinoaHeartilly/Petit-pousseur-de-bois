@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Création{% endblock %}
+{% block body %}
+    {% include "menu.html.twig" %}
+        <h1> {{ article.nom }} </h1>
+        <p id="back" onclick="window.history.back();">Retour</p>
+        <div class="body_view_article">
+            {% if article.cheminImage %}
+            <img src="{{ asset('images/'~article.cheminImage) }}"/>
+            {% else %}
+            <img src="{{ asset('images/empty.png') }}"/>
+            {% endif %}
+            <div>
+                <p>Description : {{ article.description }}</p>
+                <p>Prix : {{ article.prix }} €</p>
+                <p>Temps de réalisation estimée : {{ article.tempsRealisation }} {% if article.tempsRealisation == 1 or article.tempsRealisation == 0  %} jour. {% else %} jours. {% endif %} </p>
+                <a href="{{ path('contact')}}">Intéressé par cet article, n'hésitez pas à me contacter par mail.</a>
+            </div>
+        </div>
+
+
+{% endblock %}
+

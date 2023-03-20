@@ -5,9 +5,9 @@
 {% block body %}
     {% include "menu.html.twig" %}
     <div class="home">
-        <h1>Contacter-nous </h1>
-        
-        <div>   
+        <h1>Contactez-nous </h1>
+        {% if succes is defined %} {{ succes }} {% endif %}
+        <div class="contact">   
             {{ form(formulaire) }}
         </div>
     </div>

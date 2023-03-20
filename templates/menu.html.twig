@@ -1,5 +1,5 @@
 <header>
-    <div class="top-image"></div>
+    <!--<div class="top-image"></div>-->
     <ul class="menu">
         <li id="accueil"><a href="{{path('homepage')}}">Accueil</a></li>
         <li id="creation"><a href="{{path('article')}}">Créations</a></li>
@@ -17,3 +17,7 @@
         {% endif %}
     </ul>
 </header>
+{% if app.request.requesturi != '/article' %}
+<div class="home">
+<img class="top-image" src="{{ asset('images/top_img.jpg') }}">
+{% endif %}

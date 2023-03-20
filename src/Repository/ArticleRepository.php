@@ -54,13 +54,35 @@ class ArticleRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findByName($value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('UPPER(a.nom) LIKE :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByCat($value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.art_cat = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByCatAndName($nom, $cat): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('UPPER(a.nom) LIKE :nom')
+            ->andWhere('a.art_cat = :cat')
+            ->setParameter('nom', $nom)
+            ->setParameter('cat', $cat)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
